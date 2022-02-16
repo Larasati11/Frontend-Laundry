@@ -19,7 +19,8 @@ export default function Navbar(props){
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/member">Member</a>
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <a class="nav-link" href="/member">Member</a>
         <a class="nav-link" href="/user">User</a>
         <a class="nav-link" href="/paket">Paket</a>
         <a class="nav-link" href="/transaksi">Transaksi</a>

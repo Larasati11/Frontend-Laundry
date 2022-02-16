@@ -4,6 +4,7 @@ import Member from "./pages/Member";
 import Paket from './pages/Paket';
 import User from "./pages/User";
 import Login from "./pages/Login"
+import Dashboard from "./pages/Dashboard";
 import Header from "./header";
 import Footer from "./footer";
 import Transaksi from "./pages/Transaksi";
@@ -15,7 +16,7 @@ export default function App(){
   return(
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={App}/>
+        <Route exact path="/" element={<Navbar><Dashboard /></Navbar>}/>
         <Route path="login" element={<Login />}/>
         <Route path="member" element={<Navbar><Member /></Navbar>}/>
         <Route path="paket" element={<Navbar><Paket /></Navbar>}/>

@@ -26,7 +26,9 @@ class Paket extends React.Component{
             id_paket: "",
             jenis_paket: "",
             harga: "",
-            action: "" //menyimpan aksi dai tambah atau ubah data
+            action: "",
+            role: "",
+            visible: true //menyimpan aksi dai tambah atau ubah data
         }
         if(!localStorage.getItem("token")){
             window.location.href ="/login"
@@ -147,6 +149,16 @@ class Paket extends React.Component{
     }
     componentDidMount() {
         this.getData()
+        let user = JSON.parse(localStorage.getItem("user"))
+        if(user.role === 'admin' || this.state.role === 'kasir'){
+            this.setState({
+                visible: true
+            })
+        }else {
+            this.setState({
+                visible: false
+            })
+        }
     }
     render(){
         return(
@@ -168,9 +180,9 @@ class Paket extends React.Component{
                                         {paket.harga}
                                     </div>
                                     <div className="col-lg-4">
-                                    <button type="button" className="btn btn-outline-info mx-3"
+                                    <button type="button" className={`btn btn-outline-info mx-3 ${this.state.visible ? ``: `d-none`}`}
                                             onClick={() => this.ubahData(paket.id_paket)}>Edit</button>
-                                        <button type="button" className="btn btn-outline-danger"
+                                        <button type="button" className={`btn btn-outline-danger ${this.state.visible ? ``: `d-none`}`}
                                             onClick={() => this.hapusData(paket.id_paket)}>Delete</button>
                                     </div>
                                 </div>
@@ -179,7 +191,7 @@ class Paket extends React.Component{
                     </ul>
                     <br />
                     <div className="col-lg-3">
-                    <button type="button" class="btn btn-outline-dark"
+                    <button type="button" class={`btn btn-outline-dark ${this.state.visible ? ``: `d-none`}`}
                             onClick={() => this.tambahData()}>
                             Tambah</button>
                     </div>

@@ -29,7 +29,9 @@ class Member extends React.Component {
             alamat: "",
             telepon: "",
             jenis_kelamin: "",
-            action: "" //menyimpan aksi dai tambah atau ubah data
+            action: "",//menyimpan aksi dai tambah atau ubah data
+            role: "",
+            visible: true,
         }
         if(!localStorage.getItem("token")){
             window.location.href ="/login"
@@ -158,6 +160,29 @@ class Member extends React.Component {
     }
     componentDidMount() {
         this.getData()
+        let user = JSON.parse(localStorage.getItem("user"))
+        //cara pertama
+        this.setState({
+            role: user.role
+        })
+        //cara kedua
+        if(user.role === 'admin' || this.state.role === 'kasir'){
+            this.setState({
+                visible: true
+            })
+        }else {
+            this.setState({
+                visible: false
+            })
+        }
+        
+    }
+    showAddButton(){
+        if(this.state.role === 'admin' || this.state.role === 'kasir'){
+            <button type="button" class="btn btn-outline-dark"
+                            onClick={() => this.tambahData()}>
+                            Tambah</button>
+        }
     }
     render() {
         return (
@@ -185,9 +210,9 @@ class Member extends React.Component {
                                         {member.telepon}
                                     </div>
                                     <div className="col-lg-2">
-                                        <button type="button" className="btn btn-outline-info mx-3"
+                                        <button type="button" className={`btn btn-outline-info mx-3 ${this.state.visible ? ``: `d-none`}`}
                                             onClick={() => this.ubahData(member.id_member)}>Edit</button>
-                                        <button type="button" className="btn btn-outline-danger"
+                                        <button type="button" className={`btn btn-outline-danger ${this.state.visible ? ``: `d-none`}`}
                                             onClick={() => this.hapusData(member.id_member)}>Delete</button>
                                     </div>
                                     {/*bagian untuk alamat */}
@@ -201,9 +226,7 @@ class Member extends React.Component {
                     </ul>
                     <br />
                     <div className="col-lg-3">
-                        <button type="button" class="btn btn-outline-dark"
-                            onClick={() => this.tambahData()}>
-                            Tambah</button>
+                        {this.showAddButton()}
                     </div>
                 </div>
                 {/* form modal member */}
