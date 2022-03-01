@@ -1,6 +1,7 @@
 import React from "react"
 import {Modal} from "bootstrap";
 import axios from "axios"
+import { baseUrl, authorization } from "../config.js";
 
 class Paket extends React.Component{
     constructor(){
@@ -57,7 +58,7 @@ class Paket extends React.Component{
 
         //check aksi tambah atau ubah
         if (this.state.action === "tambah"){
-            let endpoint = "http://localhost:8001/api/paket"
+            let endpoint = `${baseUrl}/paket`
             //menampung data dari penggguna
             let newPaket = {
                 id_paket: this.state.id_paket,
@@ -69,7 +70,7 @@ class Paket extends React.Component{
             //temp.push(newPaket)
 
             //this.setState({pakets: temp})
-            axios.post(endpoint, newPaket)
+            axios.post(endpoint, newPaket, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -77,13 +78,13 @@ class Paket extends React.Component{
             .catch(error => console.log(error))
         }else if(this.state.action === "ubah"){
             this.modalPaket.hide()
-            let endpoint = "http://localhost:8001/api/paket/" + this.state.id_paket
+            let endpoint = `${baseUrl}/paket/` + this.state.id_paket
             let newPaket = {
                 id_paket: this.state.id_paket,
                 jenis_paket: this.state.jenis_paket,
                 harga: this.state.harga
             }
-            axios.put(endpoint, newPaket)
+            axios.put(endpoint, newPaket, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -121,8 +122,8 @@ class Paket extends React.Component{
     }
     hapusData(id_paket) {
         if (window.confirm("Apakah anda yakin ingin meghapus data ini?")){
-            let endpoint = "http://localhost:8001/api/paket/" + id_paket
-            axios.delete(endpoint)
+            let endpoint = `${baseUrl}/paket/` + id_paket
+            axios.delete(endpoint, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -140,8 +141,8 @@ class Paket extends React.Component{
         }
     }
     getData(){
-        let endpoint = "http://localhost:8001/api/paket"
-        axios.get(endpoint)
+        let endpoint =`${baseUrl}/paket`
+        axios.get(endpoint, authorization)
         .then(response => {
             this.setState({ pakets: response.data})
         })

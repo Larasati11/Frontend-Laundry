@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import { Modal } from "bootstrap";
+import {baseUrl, authorization} from "../config";
 
 export default class FormTransaksi extends React.Component {
     constructor() {
@@ -26,8 +27,8 @@ export default class FormTransaksi extends React.Component {
     }
 
     getMember() {
-        let endpoint = "http://localhost:8001/api/member"
-        axios.get(endpoint)
+        let endpoint = `${baseUrl}/member`
+        axios.get(endpoint, authorization)
             .then(response => {
                 this.setState({ members: response.data })
             })
@@ -35,8 +36,8 @@ export default class FormTransaksi extends React.Component {
     }
 
     getPaket() {
-        let endpoint = "http://localhost:8001/api/paket"
-        axios.get(endpoint)
+        let endpoint = `${baseUrl}/paket`
+        axios.get(endpoint, authorization)
             .then(response => {
                 this.setState({ pakets: response.data })
             })
@@ -107,7 +108,7 @@ export default class FormTransaksi extends React.Component {
         }
 	}
     simpanTransaksi(){
-        let endpoint = "http://localhost:8001/api/transaksi"
+        let endpoint = `${baseUrl}/transaksi`
             //menampung data dari penggguna
             let user= JSON.parse(localStorage.getItem("user"))
             let newData = {
@@ -126,7 +127,7 @@ export default class FormTransaksi extends React.Component {
             //temp.push(newPaket)
 
             //this.setState({pakets: temp})
-            axios.post(endpoint, newData)
+            axios.post(endpoint, newData, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 

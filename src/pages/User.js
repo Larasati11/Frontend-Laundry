@@ -1,7 +1,7 @@
 import React from "react"
 import {Modal} from "bootstrap";
 import axios from "axios"
-import { baseUrl } from "../config.js";
+import { baseUrl, authorization } from "../config.js";
 
 class User extends React.Component{
     constructor(){
@@ -74,7 +74,7 @@ class User extends React.Component{
            // temp.push(newUser)
 
            // this.setState({users: temp})
-           axios.post(endpoint, newUser)
+           axios.post(endpoint, newUser, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -89,7 +89,7 @@ class User extends React.Component{
                 username: this.state.username,
                 password: this.state.password
             } 
-            axios.put(endpoint, newUser)
+            axios.put(endpoint, newUser, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -129,7 +129,7 @@ class User extends React.Component{
     hapusData(id_user) {
         if (window.confirm("Apakah anda yakin ingin meghapus data ini?")){
             let endpoint = `${baseUrl}/users/` + id_user
-            axios.delete(endpoint)
+            axios.delete(endpoint, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -148,7 +148,7 @@ class User extends React.Component{
     }
     getData(){
         let endpoint = `${baseUrl}/users/`
-        axios.get(endpoint)
+        axios.get(endpoint, authorization)
         .then(response => {
             this.setState({ users: response.data})
         })

@@ -1,7 +1,7 @@
 import React from "react"
 import { Modal } from "bootstrap";
 import axios from "axios"
-import { baseUrl } from "../config.js";
+import { baseUrl, authorization } from "../config.js";
 
 class Member extends React.Component {
     constructor() {
@@ -73,7 +73,7 @@ class Member extends React.Component {
             //temp.push(newMember)
 
             //this.setState({ members: temp })
-            axios.post(endpoint, newMember)
+            axios.post(endpoint, newMember, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -89,7 +89,7 @@ class Member extends React.Component {
                 telepon: this.state.telepon,
                 jenis_kelamin: this.state.jenis_kelamin
             }
-            axios.put(endpoint, newMember)
+            axios.put(endpoint, newMember, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -132,7 +132,7 @@ class Member extends React.Component {
     hapusData(id_member) {
         if (window.confirm("Apakah anda yakin ingin meghapus data ini?")){
             let endpoint = `${baseUrl}/member/` + id_member
-            axios.delete(endpoint)
+            axios.delete(endpoint, authorization)
             .then(response => {
                 window.alert(response.data.message)
                 this.getData()
@@ -152,7 +152,7 @@ class Member extends React.Component {
 
     getData(){
         let endpoint = `${baseUrl}/member`
-        axios.get(endpoint)
+        axios.get(endpoint, authorization)
         .then(response => {
             this.setState({ members: response.data})
         })
