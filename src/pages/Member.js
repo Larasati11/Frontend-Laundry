@@ -177,47 +177,42 @@ class Member extends React.Component {
         }
         
     }
-    showAddButton(){
-        if(this.state.role === 'admin' || this.state.role === 'kasir'){
-            <button type="button" class="btn btn-outline-dark"
-                            onClick={() => this.tambahData()}>
-                            Tambah</button>
-        }
-    }
+   
     render() {
         return (
-            <div className="card">
-
-
+            <div className="card bg-light">
+            <div className="card-header">
                 <div className="card-body">
+                    <h4 className="text-warning">Data Member <i class="fa-solid fa-user-group"></i></h4>
+                <p>Dibawah ini adalah data member Londry :</p>
                     <ul className="list-group">
                         {this.state.members.map(member => (
                             <li className="list-group-item">
                                 <div className="row">
                                     {/*bagian untuk nama */}
                                     <div className="col-lg-4">
-                                        <small className="text-info">Nama</small> <br />
+                                        <small className="text-warning">Nama</small> <br />
                                         {member.nama}
                                     </div>
                                     {/*bagian untuk gender*/}
                                     <div className="col-lg-3">
-                                        <small className="text-info">Gender</small> <br />
+                                        <small className="text-warning">Gender</small> <br />
                                         {member.jenis_kelamin}
                                     </div>
                                     {/*bagian untuk telepon */}
                                     <div className="col-lg-3">
-                                        <small className="text-info">Telepon</small> <br />
+                                        <small className="text-warning">Telepon</small> <br />
                                         {member.telepon}
                                     </div>
                                     <div className="col-lg-2">
                                         <button type="button" className={`btn btn-outline-info mx-3 ${this.state.visible ? ``: `d-none`}`}
-                                            onClick={() => this.ubahData(member.id_member)}>Edit</button>
+                                            onClick={() => this.ubahData(member.id_member)}><i class="fa-solid fa-pen-to-square" ></i></button>
                                         <button type="button" className={`btn btn-outline-danger ${this.state.visible ? ``: `d-none`}`}
-                                            onClick={() => this.hapusData(member.id_member)}>Delete</button>
+                                            onClick={() => this.hapusData(member.id_member)}><i class="fa-solid fa-trash-can" ></i></button>
                                     </div>
                                     {/*bagian untuk alamat */}
                                     <div className="col-lg-12">
-                                        <small className="text-info">Alamat</small> <br />
+                                        <small className="text-warning">Alamat</small> <br />
                                         {member.alamat}
                                     </div>
                                 </div>
@@ -226,14 +221,16 @@ class Member extends React.Component {
                     </ul>
                     <br />
                     <div className="col-lg-3">
-                        {this.showAddButton()}
+                    <button type="button" class={`btn btn-outline-warning ${this.state.visible ? ``: `d-none`}`}
+                            onClick={() => this.tambahData()}>
+                            Tambah</button>
                     </div>
                 </div>
                 {/* form modal member */}
                 <div className="modal" id="modal-member">
                     <div className="modal-dialog modal-md">
                         <div className="modal-content">
-                            <div className="modal-header bg-dark">
+                            <div className="modal-header bg-warning">
                                 <h4 className="text-white">
                                     Form Member
                                 </h4>
@@ -276,6 +273,8 @@ class Member extends React.Component {
                     </div>
                 </div>
             </div>
+            </div>
+        
         )
     }
 }

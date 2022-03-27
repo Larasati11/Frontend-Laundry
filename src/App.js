@@ -11,6 +11,7 @@ import Transaksi from "./pages/Transaksi";
 import FormTransaksi from './pages/FormTransaksi';
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Navbar from "./Navbar";
+import './style.css'
 
 export default function App(){
   return(

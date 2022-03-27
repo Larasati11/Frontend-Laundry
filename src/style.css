@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inconsolata:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+.main-content{
+    padding: 80px 0px 0px;
+}
+
+/**/
+.dashboard-page .hello h2{
+    font-family: 'Fredoka One', cursive;
+    margin-top: 200px;
+    margin-left: 100px;
+    font-size: 70px;
+    color : purple
+}
+.dashboard-page .hello h6{
+    margin-left: 100px;
+    font-size: 20px;
+    font-family: 'Inconsolata', monospace;
+}

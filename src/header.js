@@ -20,6 +20,7 @@ function Header() {
                 Transaksi
             </NavLink>
         </nav>
+        
     )
 }
 export default Header;

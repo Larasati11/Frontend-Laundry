@@ -1,7 +1,7 @@
 import React from "react"
 import {Modal} from "bootstrap";
 import axios from "axios"
-import { baseUrl, authorization } from "../config.js";
+import { baseUrl, formatNumber, authorization } from "../config.js";
 
 class Paket extends React.Component{
     constructor(){
@@ -163,9 +163,12 @@ class Paket extends React.Component{
     }
     render(){
         return(
-            <div className="card">
-        
+            <div className="card bg-light">
+            <div className="card-header">
                 <div className="card-body">
+                    
+                <h4 className="text-info">Data Paket <i class="fa-solid fa-shirt"></i></h4>
+                <p>Dibawah ini adalah data member Londry :</p>
                     <ul className="list-group">
                         {this.state.pakets.map(paket => (
                             <li className="list-group-item">
@@ -178,13 +181,13 @@ class Paket extends React.Component{
                                      {/*bagian untuk harga*/}
                                      <div className="col-lg-4">
                                         <small className="text-info">Harga</small> <br />
-                                        {paket.harga}
+                                        Rp{formatNumber(paket.harga)}
                                     </div>
                                     <div className="col-lg-4">
                                     <button type="button" className={`btn btn-outline-info mx-3 ${this.state.visible ? ``: `d-none`}`}
-                                            onClick={() => this.ubahData(paket.id_paket)}>Edit</button>
+                                            onClick={() => this.ubahData(paket.id_paket)}><i class="fa-solid fa-pen-to-square" ></i></button>
                                         <button type="button" className={`btn btn-outline-danger ${this.state.visible ? ``: `d-none`}`}
-                                            onClick={() => this.hapusData(paket.id_paket)}>Delete</button>
+                                            onClick={() => this.hapusData(paket.id_paket)}><i class="fa-solid fa-trash-can"></i></button>
                                     </div>
                                 </div>
                             </li>
@@ -192,7 +195,7 @@ class Paket extends React.Component{
                     </ul>
                     <br />
                     <div className="col-lg-3">
-                    <button type="button" class={`btn btn-outline-dark ${this.state.visible ? ``: `d-none`}`}
+                    <button type="button" class={`btn btn-outline-info ${this.state.visible ? ``: `d-none`}`}
                             onClick={() => this.tambahData()}>
                             Tambah</button>
                     </div>
@@ -201,7 +204,7 @@ class Paket extends React.Component{
                  <div className="modal" id="modal-paket">
                     <div className="modal-dialog modal-md">
                         <div className="modal-content">
-                            <div className="modal-header bg-dark">
+                            <div className="modal-header bg-info">
                                 <h4 className="text-white">
                                     Form Paket
                                 </h4>
@@ -226,10 +229,14 @@ class Paket extends React.Component{
                                 </button>
                             </form>
                             </div>
+                            
                         </div>
+                        
                     </div>
+                   
                 </div>
             </div>
+        </div>
         )
     }
 }
